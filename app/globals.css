@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-outfit: 'Outfit', system-ui, sans-serif;
+
+  --color-forest-50:  #f0f7f2;
+  --color-forest-100: #d9ede0;
+  --color-forest-500: #2d8559;
+  --color-forest-700: #195538;
+  --color-forest-900: #0f2d1e;
+  --color-forest-950: #071a11;
+
+  --color-amber-400:  #e8a825;
+  --color-amber-500:  #d4901a;
+  --color-cream:      #f9f4ed;
+
+  --shadow-sm:  0 1px 3px rgba(15, 45, 30, 0.06), 0 1px 2px rgba(15, 45, 30, 0.04);
+  --shadow-md:  0 4px 16px rgba(15, 45, 30, 0.08), 0 2px 8px rgba(15, 45, 30, 0.05);
+  --shadow-lg:  0 12px 40px rgba(15, 45, 30, 0.12), 0 4px 16px rgba(15, 45, 30, 0.07);
+  --shadow-xl:  0 24px 64px rgba(15, 45, 30, 0.16), 0 8px 24px rgba(15, 45, 30, 0.10);
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-outfit);
+  background-color: var(--color-cream);
+  color: var(--color-forest-900);
+  min-height: 100dvh;
+}
+
+/* ── Typography ──────────────────────────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--font-cormorant);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: #b3dbc3;
+  border-radius: 999px;
+}
+
+/* ── Custom utilities ─────────────────────────────────────────────────────── */
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  
+  .glass {
+    background: rgba(249, 244, 237, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+
+  .glass-dark {
+    background: rgba(10, 26, 16, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .card-hover {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .grain-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .shimmer-loading {
+    background: linear-gradient(90deg, #e8f0ec 25%, #f0f7f2 50%, #e8f0ec 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+/* ── Form elements ────────────────────────────────────────────────────────── */
+@layer components {
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border border-forest-200 bg-white
+           font-body text-sm text-forest-900 placeholder-forest-300
+           focus:outline-none focus:ring-2 focus:ring-forest-400/30 focus:border-forest-400
+           transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           bg-forest-700 hover:bg-forest-800 text-white
+           font-body font-medium text-sm rounded-xl
+           transition-all duration-200 active:scale-[0.98]
+           shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           bg-white hover:bg-forest-50 text-forest-700 border border-forest-200
+           font-body font-medium text-sm rounded-xl
+           transition-all duration-200 active:scale-[0.98];
+  }
+
+  .btn-amber {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           bg-amber-500 hover:bg-amber-600 text-white
+           font-body font-medium text-sm rounded-xl
+           transition-all duration-200 active:scale-[0.98]
+           shadow-md hover:shadow-lg;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium border;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl border border-forest-100 overflow-hidden;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .section-title {
+    @apply font-display text-3xl sm:text-4xl font-semibold text-forest-900;
+  }
+
+  .page-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* ── Animation delays ─────────────────────────────────────────────────────── */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+
+/* ── Prose overrides ──────────────────────────────────────────────────────── */
+.rich-text p { margin-bottom: 1rem; line-height: 1.8; }
+.rich-text h3 { margin: 1.5rem 0 0.75rem; font-family: var(--font-cormorant); font-size: 1.5rem; }
+.rich-text ul { margin: 0.75rem 0 0.75rem 1.5rem; }
+.rich-text li { margin-bottom: 0.5rem; }
