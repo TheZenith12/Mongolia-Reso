@@ -158,7 +158,7 @@ export function buildPlaceMetadata(place: Place) {
     description,
     alternates: { canonical: placeUrl },
     openGraph: {
-      type: isResort ? ('website' as const) : ('place' as const),
+      type: 'website' as const,
       url: placeUrl,
       title,
       description,
