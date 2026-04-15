@@ -39,7 +39,7 @@ export default function Header({ stats, profile }: HeaderProps) {
               <Building2 size={12} className="text-amber-400" />
               <span>{stats.total_resorts} амралтын газар</span>
             </span>
-            <span className="flex items-center gap-1.5 hidden sm:flex">
+            <span className="flex items-center gap-1.5 sm:flex">
               <Leaf size={12} className="text-amber-400" />
               <span>{stats.total_nature} байгалийн газар</span>
             </span>
@@ -85,6 +85,13 @@ export default function Header({ stats, profile }: HeaderProps) {
               </Link>
             ))}
           </nav>
+
+
+
+
+
+
+          
 
           {/* Right side */}
           <div className="flex items-center gap-2">

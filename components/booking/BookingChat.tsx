@@ -79,12 +79,13 @@ export default function BookingChat({
       .subscribe();
 
     return () => { supabase.removeChannel(channel); };
-  }, [bookingId]);
+  }, [bookingId, fetchMessages, supabase]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   async function fetchMessages() {
     setLoading(true);
     const { data } = await (supabase.from('booking_messages') as any)
