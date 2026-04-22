@@ -8,7 +8,7 @@
 |---------|-----------|
 | Framework | Next.js 14 (App Router) |
 | UI | Tailwind CSS + Custom Design System |
-| Database | PostgreSQL (via Supabase) |
+| Database | Supabase |
 | Auth | Supabase Auth |
 | Media | Cloudinary |
 | Payments | QPay + Stripe |
