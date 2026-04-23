@@ -29,15 +29,21 @@ export default function AuthPage({ mode = "login" }: { mode?: Mode }) {
         if (error) throw error;
         if (data.session) {
           toast.success("Амжилттай нэвтэрлээ!");
-          // Redirect based on role
-          const { data: profile } = await supabase
-            .from("profiles")
-            .select("role")
-            .eq("id", data.session.user.id)
-            .single();
-          const isAdmin =
-            (profile as any)?.role === "super_admin" || (profile as any)?.role === "manager";
-          window.location.href = isAdmin ? "/admin" : "/";
+          try {
+            const { data: profile } = await supabase
+              .from("profiles")
+              .select("role")
+              .eq("id", data.session.user.id)
+              .maybeSingle();
+            const role = (profile as any)?.role;
+            if (role === "super_admin" || role === "manager") {
+              window.location.href = "/admin";
+            } else {
+              window.location.href = "/";
+            }
+          } catch {
+            window.location.href = "/";
+          }
         }
       } else {
         if (password.length < 6) {
